@@ -8,8 +8,8 @@
     <meta name="author" content="O. Kalu">
     <link rel="icon" href="favicon.ico">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
-    <title>eRegistration - a demo spring boot webapp</title>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">-->
+    <title>eLibrary - a demo spring boot webapp</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -38,22 +38,49 @@
 
 <p>&nbsp;</p>
 <div class="container">
-    <h3>Welcome to the E-Register (eREGISTER)</h3>
+    <h3>Register A Student</h3>
     <hr/>
     <div style="font-size: 1em">
-        To browse and manage the <a href="/students">List of Students</a>, please first make sure to read the
-        instructions and key points provided below. And then click the
-        appropriate menu item, located on the menu-bar above.<br/><br/>
-
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text
-        ever since the 1500s, when an unknown printer took a galley of type
-        and scrambled it to make a type specimen book. It has survived not
-        only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with
-        the release of Letraset sheets containing Lorem Ipsum passages, and
-        more recently with desktop publishing software like Aldus PageMaker
-        including versions of Lorem Ipsum.
+        <table class="table">
+            <form  action="/register" method="post" th:object="${s}">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Enter student name" name="firstName" th:value="${s.firstName}" >
+                    <div>
+                        <span style="color: red;" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" class="form-control" id="middleName" placeholder="Enter student name" name="middleName" th:value="${s.middleName}" >
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Enter student name" name="lastName" th:value="${s.lastName}" >
+                </div>
+                <div class="form-group">
+                    <label for="studentNumber">Student Number</label>
+                    <input type="text" class="form-control" id="studentNumber" placeholder="Enter student name" name="studentNumber" th:value="${s.studentNumber}" >
+                </div>
+                <div class="form-group">
+                    <label for="gpa">Gpa</label>
+                    <input type="text" class="form-control" id="gpa" placeholder="Course" name="gpa" th:value="${s.gpa}" >
+                </div>
+                <div class="form-group">
+                    <label for="enrollmentDate">Enrollment Date</label>
+                    <input type="date" class="form-control" id="enrollmentDate" placeholder="Course" name="enrollmentDate" th:value="${s.enrollmentDate}" >
+                </div>
+                <div class="form-group ">
+                    <label for="isInternational">International Student?</label>
+                     <select th:field="*{isInternational}" class="custom-select my-1 mr-sm-2" id="isInternational" name="isInternational">
+                        <option th:value="'--'" th:text="Choose......" selected>Choose...</option>
+                        <option th:value="'Yes'" th:text="Yes">Yes</option>
+                         <option th:value="'No'" th:text="No">No</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </table>
     </div>
 </div>
 

@@ -9,7 +9,7 @@
     <link rel="icon" href="favicon.ico">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
-    <title>eRegistration - a demo spring boot webapp</title>
+    <title>eLibrary - a demo spring boot webapp</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -38,22 +38,47 @@
 
 <p>&nbsp;</p>
 <div class="container">
-    <h3>Welcome to the E-Register (eREGISTER)</h3>
+    <h3>List of Registered Students</h3>
     <hr/>
     <div style="font-size: 1em">
-        To browse and manage the <a href="/students">List of Students</a>, please first make sure to read the
-        instructions and key points provided below. And then click the
-        appropriate menu item, located on the menu-bar above.<br/><br/>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Middle Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Student Number</th>
+                <th scope="col">Gpa </th>
+                <th scope="col">Enrollment Date </th>
+                <th scope="col">Is International? </th>
 
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text
-        ever since the 1500s, when an unknown printer took a galley of type
-        and scrambled it to make a type specimen book. It has survived not
-        only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with
-        the release of Letraset sheets containing Lorem Ipsum passages, and
-        more recently with desktop publishing software like Aldus PageMaker
-        including versions of Lorem Ipsum.
+            </tr>
+            <tr th:if="${students.empty}">
+                <td colspan="2"> No Student Available </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <th scope="row" th:text="${student.studentId}"></th>
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.middleName}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.studentNumber}"></td>
+                <td th:text="${student.gpa}"></td>
+                <td th:text="${student.enrollmentDate}"></td>
+                <td th:text="${student.isInternational}"></td>
+                <td><a th:href="@{/edit/{id}(id=${student.studentId})}"
+                       class="btn btn-primary">Edit</a> <!-- <a th:href="@{editIdea}" class="btn btn-secondary">Edit</a>  -->
+                </td>
+                <td><a th:href="@{/delete/{id}(id=${student.studentId})}"
+                       class="btn btn-danger">Delete</a></td>
+
+            </tr>
+
+
+            </tbody>
+        </table>
     </div>
 </div>
 
